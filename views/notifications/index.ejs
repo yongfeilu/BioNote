@@ -1,0 +1,18 @@
+<%- include("../partials/header") %>
+
+<h1>
+	Notifications
+</h1>
+
+<ul>
+	<% allNotifications.forEach(function(notification) { %>
+		<li>
+			<a href="/notes/<%= notification.noteId %>">
+				<%= notification.username %> created a new note 
+			</a>
+		</li>
+	<% }) %>
+</ul>
+
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,27 @@
+<%- include("../partials/header") %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header"><%= question.title %></div>
+    <div class="ui top attached ">
+        <div class="item">
+            <img class="ui centered rounded image" src="<%= question.image %>" style="height: 350px">
+            <div class="content">
+                <em><%= question.createdAt.toDateString() %></em>
+            </div>
+            <div class="description" style="font-size: 15px; margin: 5px auto">
+                <p><%- question.text %></p>
+            </div>
+			<% if(currentUser && question.author.id && question.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+				<a class="btn btn-xs btn-warning" 
+				   href="/notes/<%= note._id %>/questions/<%= question._id %>/edit">
+				   Edit
+				</a>
+				<form class="delete-form" action="/notes/<%= note._id %>/questions/<%= question._id %>?_method=DELETE" method="POST">
+					<input type="submit" class="btn btn-xs btn-danger" value="Delete">
+				</form>
+			<% } %>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

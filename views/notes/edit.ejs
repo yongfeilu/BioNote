@@ -1,0 +1,37 @@
+<%- include("../partials/header") %>
+
+
+	<div class="row">
+		<h1 style="text-align: center">Edit <%= note.name %></h1>
+		<div style="width: 25%; margin:25px auto;">
+			<form action="/notes/<%= note._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input class="form-control" type="text" name="note[name]" value="<%= note.name%>">
+				</div>
+				<div class="form-group">
+					<label for="difficulty">Degree of Difficulty</label>
+					<input class="form-control" type="text" name="note[difficulty]" value="<%= note.difficulty %>">
+				</div>
+				<div class="form-group">
+					<label for="image">Image</label>
+					<input type="file" id="image" name="image" accept="image/*">
+				</div>
+				<div class="form-group">
+					<label for="description">Description</label>
+					<input class="form-control" type = "text" name="note[description]" value="<%= note.description%>">
+				</div>
+				<div class="form-group">
+					<label for="url">URL</label>
+					<input class="form-control" type = "text" name="note[url]" value="<%= note.url %>">
+				</div>
+				<div class="form-group">
+					<button class="btn btn-lg btn-primary btn-block">Update!</button>
+				</div>	
+			</form>
+			<a href="/notes">Go Back</a>
+		</div>
+	</div>
+	
+
+<%- include("../partials/footer") %>

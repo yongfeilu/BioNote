@@ -1,0 +1,52 @@
+<%- include("../partials/header") %>
+
+	<header class="jumbotron">
+		<div class="container">
+			<h1>Welcome to BioNote!</h1>
+			<p>View all of your notes you've accumulated from the past</p>
+			<p>
+				<a class="btn btn-primary btn-md" href="/notes/new">Add New Note</a>
+				<a class="btn btn-primary btn-md" href="/todos">View Month Goal</a>
+			</p>
+		</div>
+	</header>
+	
+
+	<div class="row text-center" style="display:flex; flex-wrap: wrap">
+		<div class="col-md-12">
+			<% if(noMatch) { %>
+				<h3><%= noMatch %></h3>
+				<form action="/notes" method="GET" class="form-inline">
+					<div class="form-group">
+						<input type="text" name="search" placeholder="Note search..." class="form-control">
+						<input type="submit" value="Search" class="btn btn-default">
+					</div>
+				</form>
+			<% } %>
+		</div>
+		<% notes.forEach(function(note){ %>
+				<div class="col-md-3 col-sm-6">
+					<div class="thumbnail">
+						<img src="<%= note.image %>">
+						<div class="caption">
+							<h4><%= note.name %></h4>
+							<% if(note.rating === 0) { %>
+								<em>No reviews yet.</em>
+							<% } else {%>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star <% if (note.rating > 1.5) { %> checked <% } %>"></span>
+								<span class="fa fa-star <% if (note.rating > 2.5) { %> checked <% } %>"></span>
+								<span class="fa fa-star <% if (note.rating > 3.5) { %> checked <% } %>"></span>
+								<span class="fa fa-star <% if (note.rating > 4.5) { %> checked <% } %>"></span>
+							<% } %>
+						</div>
+						<p>
+							<a href="/notes/<%= note._id %>" class="btn btn-primary">More Info</a>
+						</p>
+					</div>
+				</div>
+		<% }); %>
+	</div>
+	
+
+<%- include("../partials/footer") %>

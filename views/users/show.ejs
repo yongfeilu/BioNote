@@ -1,0 +1,38 @@
+<%- include("../partials/header") %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header"><%= user.firstName + " " + user.lastName %></div>
+    <div class="ui top attached ">
+        <div class="item">
+            <img class="ui centered rounded image" src="<%= user.image %>" style="height: 350px">
+            <div class="content">
+                <em><a href="mailto:<%= user.email %>"><%= user.email %></a></em>
+            </div>
+            <div class="description" style="font-size: 15px; margin: 5px auto">
+                <p><%- user.description %></p>
+            </div>
+            <% if(currentUser && user._id && !user._id.equals(currentUser._id)) { %>
+            <div style="margin: 3px auto">
+                <a href="/follow/<%= user.id %>"><button class="btn btn-sm btn-primary">Follow <%= user.username %></button></a>
+            </div>
+            <% } %>
+			<% if(currentUser && user._id && user._id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+				<a class="btn btn-xs btn-warning" 
+				   href="/users/<%= user._id %>/edit">
+				   Edit
+				</a>
+			<% } %>
+        </div>
+		<hr>
+        <div class="col-md-8">
+			<div class="ui huge header"><%= user.username %>'s Notes:</div>
+            <ul>
+            <% notes.forEach(function(note){ %>
+                    <li><a href="/notes/<%= note.id %>"><%= note.name %> </a></li>
+            <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>
